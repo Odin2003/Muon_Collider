@@ -64,7 +64,7 @@ exit
 
 This will create a directory called **mu_mu_ax_gamma** inside your MG5 directory. Note that Madgraph uses "a" for photons, not to be confused with "ax" for ALPs. If you have MG5 locally, you can also look at the Feynman diagrams when inside the MG5 interface by running "display diagrams" before exiting.
 
-Inside mu_mu_ax_gamma, you will see a directory called **Cards**. This holds the parameters for our model and collisions. There are two cards we want to pay special attentiont to **run_card.dat** and **param_card.dat**. run_card.dat will determine all sorts of kinematic constraints, such as the beam energy and the minimum $p_T$ of the photon and jets. param_card.dat holds the masses and couplings of the particles. The "Ma" and "Wa" parameters hold the mass and decay width of the ALP, respectively. We will consider a coupling of $0.1$, for which here are some example decay widths for different masses:
+Inside mu_mu_ax_gamma, you will see a directory called **Cards**. This holds the parameters for our model and collisions. There are two cards we want to pay special attentiont to **run_card.dat** and **param_card.dat**. run_card.dat will determine number of events and all sorts of kinematic constraints, such as the beam energy and the minimum $p_T$ of the photon and jets. param_card.dat holds the masses and couplings of the particles. The "Ma" and "Wa" parameters hold the mass and decay width of the ALP, respectively. We will consider a coupling of $0.1$, for which here are some example decay widths for different masses:
 
 <div align="center">
   <img width="417" alt="image" src="https://github.com/user-attachments/assets/76a2a623-2e9b-4740-a397-e1f53f05f1b2" />
@@ -76,7 +76,49 @@ Inside mu_mu_ax_gamma, you will see a directory called **Cards**. This holds the
 </div>
 <br>
 
-For a further discussion on decay widths of ALPs, see D.1 of Bauer et. al (https://link.springer.com/article/10.1007/JHEP12(2017)044).
+For a further discussion on decay widths of ALPs, see D.1 of Bauer et al. (https://link.springer.com/article/10.1007/JHEP12(2017)044). Let's consider an ALP mass of 20 GeV (set Ma to 20 and Wa to 0.340122) at a beam energy of 1500GeV (3TeV CoM energy), and a photon $p_T$ (pta) of 50 GeV. Now we are ready to generate events inside our mu_mu_ax_gamma directory:
+
+
+```
+cp Cards/param_card.dat bin/internal/ufomodel/.
+./bin/generate events m20_3TeV_50GeV_gamma
+```
+
+You should see this sort of output:
+
+```
+The following switches determine which programs are run:
+/=================== Description ===================|============= values ==============|======== other options ========\
+| 1. Choose the shower/hadronization program        |        shower = OFF               |     Pythia8                   |
+| 2. Choose the detector simulation program         |      detector = Not Avail.        |     Please install module     |
+| 3. Choose an analysis package (plot/convert)      |      analysis = Not Avail.        |     Please install module     |
+| 4. Decay onshell particles                        |       madspin = OFF               |     ON|onshell|full           |
+| 5. Add weights to events for new hypp.            |      reweight = OFF               |     ON                        |
+\=======================================================================================================================/
+Either type the switch number (1 to 5) to change its setting,
+Set any switch explicitly (e.g. type 'shower=Pythia8' at the prompt)
+Type 'help' for the list of all valid option
+Type '0', 'auto', 'done' or just press enter when you are done.
+```
+
+since we want to shower with pythia, we run
+
+```
+shower = Pythia8
+```
+
+and then "return" to launch. If your simulation crashes without any explanation when merging the pythia8 runs, it is likely that the pythia8 version defined in MG5 is different from the version defined in your environment. Make sure these are equivalent or that you don't have pythia8 separately in the environment.
+
+When the runs finish, you should have a new directory called "Events" which holds another directory "m20_3TeV_50GeV_gamma", where you will find these files:
+
+```
+m20_3TeV_20GeV_gamma_tag_1_banner.txt  run_shower.sh  tag_1_djrs.dat  tag_1_pts.dat  tag_1_pythia8.cmd	tag_1_pythia8.log  tag_1_pythia8_events.hepmc.gz  unweighted_events.lhe.gz
+```
+
+
+The .txt file will hold some of the MG5 output. At the bottom of this file you will find the cross-section of your interaction. We will continue with the tag_1_pythia8_events.hepmc.gz file, which holds the showered data of our collisions. This we will pass to the muon collider to see what our collisions look like inside that detector.
+
+
 
 
 
