@@ -17,7 +17,16 @@ mkdir software
 cd software
 wget https://launchpad.net/mg5amcnlo/3.0/3.6.x/+download/MG5_aMC_v3.5.8.tar.gz
 tar -xvf MG5_aMC_v3.5.8.tar.gz
+cd MG5_aMC_v3_5_8
 ```
+
+Within MG5_aMC_v3_5_8, we want to copy our Axion model so that we can use it later:
+
+
+```
+cp -r ../SM_Axion_UFO models/.
+```
+
 
 Set up the singularity shell to have all dependencies:
 
@@ -27,14 +36,28 @@ source /opt/setup_mucoll.sh
 ```
 
 
-Inside MG5_aMC_v3.5.8, run
+Inside MG5_aMC_v3_5_8, run
 
 
 ```
 ./bin/mg5_aMC
 ```
 
-This will bring you into the MG5 interface. This is where we will generate the interactions we want to inspect.
+This will bring you into the MG5 interface. This is where we will generate the interactions we want to inspect. We will want to use pythia, import our model, and look at jets with b quarks, so we need to set this up:
+
+
+```
+install pythia8
+import model SM_Axion_UFO
+define j = j b b~
+generate mu+ mu- > ax a, (ax > b b~)
+output mu_mu_ax_gamma
+exit
+```
+
+This will create a directory called mu_mu_ax_gamma inside your MG5 directory. Note that Madgraph uses a for photons, not to be confused with ax for ALPs. If you have MG5 locally, you can also look at the Feynman diagrams when inside the MG5 interface by running "display diagrams" before exiting.
+
+
 
 
 
