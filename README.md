@@ -7,7 +7,7 @@ This roughly follows the tutorials found at https://mcd-wiki.web.cern.ch/softwar
 ### MadGraph 5
 Generating events is done with MadGraph5. Here I will describe the process to generate events for muon collisions in which an Axion-Like Particle (ALP) and a photon are produced. The ALP consequently decays to $b ~ \bar{b}$ quarks:
 
-<img width="173" alt="image" src="https://github.com/user-attachments/assets/e2531751-7770-47f1-a42e-499d2eeeca67" />
+<img width="200" alt="image" src="https://github.com/user-attachments/assets/e2531751-7770-47f1-a42e-499d2eeeca67" />
 
 
 Create a software folder and inside download the MadGraph software from https://launchpad.net/mg5amcnlo :
