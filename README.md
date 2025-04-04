@@ -119,7 +119,7 @@ tag_1_pythia8.cmd	tag_1_pythia8.log  tag_1_pythia8_events.hepmc.gz  unweighted_e
 
 The .txt file will hold some of the MG5 output. At the bottom of this file you will find the cross-section of your interaction. We will continue with the tag_1_pythia8_events.hepmc.gz file, which holds the showered data of our collisions.
 
-We have now finished "nature's part of the job", the physics that takes place when we collide muons together and produce ALPs and photons. Now we want to know what nature looks like when we, as humans, look at it using a detector. We pass the .hepmc file to an emulater which "smears" the truth-level data in a way that mimics our detector. Only then can we compare simulation to experiment.
+We have now finished "nature's part of the job", the physics that takes place when we collide muons together and produce photons and ALPs, which decay and hadronize to produce jets. Now we want to know what nature looks like when we, as humans, look at it using a detector. We pass the .hepmc file to an emulater which "smears" the truth-level data in a way that mimics our detector. Only then can we compare simulation to experiment.
 
 
 
