@@ -27,7 +27,7 @@ for i in range(njobs):
     sim_cmd_tmp = f"""
     mkdir -p sim
     cd sim
-    ddsim --steeringFile /home/odschnei/USMCC/mucoll-benchmarks/simulation/ilcsoft/steer_baseline.py \
+    ddsim --steeringFile ../mucoll-benchmarks/simulation/ilcsoft/steer_baseline.py \
           --inputFile ../tag_1_pythia8_events.hepmc \
           --numberOfEvents {nevents_per_job} \
           --outputFile output_sim_run{runnumber}_{i}.slcio
@@ -39,7 +39,7 @@ for i in range(njobs):
     mkdir -p digi
     mkdir digi_{i}
     cd digi_{i}
-    k4run /home/odschnei/USMCC/mucoll-benchmarks/digitisation/k4run/digi_steer.py \
+    k4run ../mucoll-benchmarks/digitisation/k4run/digi_steer.py \
           --LcioEvent.Files ../sim/output_sim_run{runnumber}_{i}.slcio 
     mv output_digi.slcio ../digi/output_digi_run{runnumber}_{i}.slcio
     cd ..
@@ -50,8 +50,8 @@ for i in range(njobs):
     mkdir -p reco
     mkdir reco_{i}
     cd reco_{i}
-    cp -a /home/odschnei/USMCC/mucoll-benchmarks/reconstruction/k4run/PandoraSettings ./
-    k4run /home/odschnei/USMCC/mucoll-benchmarks/reconstruction/k4run/reco_steer.py \\
+    cp -a ../mucoll-benchmarks/reconstruction/k4run/PandoraSettings ./
+    k4run ../mucoll-benchmarks/reconstruction/k4run/reco_steer.py \\
             --LcioEvent.Files ../digi/output_digi_run{runnumber}_{i}.slcio \\
             --MatFile \$MATFILE \\
             --TGeoFile \$TGEOFILE
