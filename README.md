@@ -308,7 +308,7 @@ Now you know how to generate events and reconstruct them using the detector for 
 
 ## Submitting Jobs
 
-
+To submit jobs to the cluster and generate many events, use jobSubmission.py. Make sure it correctly points to the mucoll-benchmarks folder.
 
 
 
