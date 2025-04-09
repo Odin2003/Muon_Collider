@@ -127,7 +127,12 @@ We have now finished "nature's part of the job", the physics that takes place wh
 
 
 
-
+&nbsp; 
+&nbsp; 
+&nbsp; 
+&nbsp; 
+&nbsp; 
+&nbsp; 
 
 ## Detector Emulation
 
@@ -289,6 +294,15 @@ ced2go -d ${MUCOLL_GEO} output_reco.slcio
 This will be slow and buffering due to the pipeline created to the HPCC, but will give you a good visualiztion of your events and the calorimeters involved.
 
 Now you know how to generate events and reconstruct them using the detector for the muon collider. You will have noticed that this takes a considerable amount of time for only few events. The next section describes how to generate multiple thousand events for an analysis.
+
+
+&nbsp; 
+&nbsp; 
+&nbsp; 
+&nbsp; 
+&nbsp; 
+&nbsp; 
+
 
 
 
