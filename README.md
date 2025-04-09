@@ -129,3 +129,46 @@ We have now finished "nature's part of the job", the physics that takes place wh
 
 
 
+## Detector Emulation
+
+The detector emulation has three steps:
+
+*  simulating event particles passing through the detector (**sim**)
+*  digitisation of the signal left by the particles (**digi**)
+*  reconstructing the particle tracks from detector information (**reco**)
+
+### sim
+For the simulation step, we pass the .hepmc file created by Pythia8 in event generation to the detector. Make sure you ran and set up the singularity environment as before:
+
+```
+singularity shell docker://gitlab-registry.cern.ch/muon-collider/mucoll-deploy/mucoll:2.9-alma9
+source /opt/setup_mucoll.sh
+```
+
+
+Then create a sim directory, in which you run
+
+```
+ddsim --steeringFile ../mucoll-benchmarks/simulation/ilcsoft/steer_baseline.py \
+--inputFile ../tag_1_pythia8_events.hepmc \
+--numberOfEvents 10 \
+--outputFile output_sim.slcio
+```
+
+Make sure the first two lines poing to the correct steer and .hepmc files.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
