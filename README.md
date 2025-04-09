@@ -137,8 +137,8 @@ The detector emulation has three steps:
 *  digitisation of the signal left by the particles (**digi**)
 *  reconstructing the particle tracks from detector information (**reco**)
 
-### sim
-For the simulation step, we pass the .hepmc file created by Pythia8 in event generation to the detector. Make sure you ran and set up the singularity environment as before:
+### simulation
+For the simulation step, Monte Carlo particles are passed through the detector with GEANT4. We pass the .hepmc file created by Pythia8 in event generation to the detector. Make sure you ran and set up the singularity environment as before:
 
 ```
 singularity shell docker://gitlab-registry.cern.ch/muon-collider/mucoll-deploy/mucoll:2.9-alma9
@@ -155,10 +155,74 @@ ddsim --steeringFile ../mucoll-benchmarks/simulation/ilcsoft/steer_baseline.py \
 --outputFile output_sim.slcio
 ```
 
-Make sure the first two lines poing to the correct steer and .hepmc files.
+Make sure the first two lines poing to the correct steer and .hepmc files. You can inspect the output file using
+
+```
+anajob output_sim.slcio
+```
+
+### digitisation
+
+Next is the digitisation step, which typically involves a minimum amount of energy to be considered a hit and smears the energy to a realistic detector resolution. Make a digi directory and run
+
+```
+k4run ../mucoll-benchmarks/digitisation/k4run/digi_steer.py \
+--LcioEvent.Files ../sim/output_sim.slcio
+```
+
+Which takes the sim output file as an input.
+
+### reconstruction
+
+For reconstruction, first make sure your environment is really set up correctly:
+
+```
+env | grep ACTS_
+```
+
+This should give
+
+```
+ACTS_TGeoFile=/opt/spack/opt/spack/linux-almalinux9-x86_64/gcc-11.3.1/actstracking-1.2.2-tjfu4av5xb6ivzyihvi2a3djbpnqx5nk/share/ACTSTracking/data/MuColl_v1.root
+ACTS_MatFile=/opt/spack/opt/spack/linux-almalinux9-x86_64/gcc-11.3.1/actstracking-1.2.2-tjfu4av5xb6ivzyihvi2a3djbpnqx5nk/share/ACTSTracking/data/material-maps.json
+```
+
+Then create a reco directory and copy the settings from the mucoll-benchmarks directory into it:
+
+```
+cp -a /home/odschnei/USMCC/mucoll-benchmarks/reconstruction/k4run/PandoraSettings ./
+```
+
+Now you can run the reconstruction step:
+
+```
+k4run ../mucoll-benchmarks/reconstruction/k4run/reco_steer.py \
+    --LcioEvent.Files ../digi/output_digi.slcio \
+    --MatFile ${ACTS_MatFile} \
+    --TGeoFile ${ACTS_TGeoFile}
+```
+
+Which takes the digi output file as an input. You can again inspect this file using anajob:
+
+```
+anajob outpu_reco.slcio
+```
+
+This will show you a bunch of different collections, representing hits in different calorimeters. The most important are MCParticle, which contains truth-level data of the event, and PFOCandidate, which is the reconstructed Particle Flow Objects.
 
 
+### Visualization
 
+If you logged into HPCC using the "-X -Y" add-on, you can visualize your events using the output file from your reco step:
+
+
+```
+ced2go -d ${MUCOLL_GEO} output_reco.slcio
+```
+
+This will be slow and buffering due to the pipeline created to the HPCC, but will give you a good visualiztion of your events and the calorimeters involved.
+
+Now you know how to generate events 
 
 
 
