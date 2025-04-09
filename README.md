@@ -208,7 +208,73 @@ Which takes the digi output file as an input. You can again inspect this file us
 anajob outpu_reco.slcio
 ```
 
-This will show you a bunch of different collections, representing hits in different calorimeters. The most important are MCParticle, which contains truth-level data of the event, and PFOCandidate, which is the reconstructed Particle Flow Objects.
+This will show you a bunch of different collections, representing hits in different calorimeters. The most important are MCParticle, which contains truth-level data of the event, and PandoraPFOs, which is the reconstructed Particle Flow Objects. Here is an example output for one event:
+
+```
+RUN: -1         EVENT: 0           DETECTOR: MuColl_v1
+---------------------------------------------------------------------------
+COLLECTION NAME                    COLLECTION TYPE            # OF ELEMENTS
+===========================================================================
+AllTracks                          Track                                 81
+ECalBarrelCollection               SimCalorimeterHit                  30042
+ECalEndcapCollection               SimCalorimeterHit                    412
+EcalBarrelCollectionDigi           CalorimeterHit                     23482
+EcalBarrelCollectionRec            CalorimeterHit                     23482
+EcalBarrelRelationsSimDigi         LCRelation                         23482
+EcalBarrelRelationsSimRec          LCRelation                         23482
+EcalEndcapCollectionDigi           CalorimeterHit                        78
+EcalEndcapCollectionRec            CalorimeterHit                        78
+EcalEndcapRelationsSimDigi         LCRelation                            78
+EcalEndcapRelationsSimRec          LCRelation                            78
+HCalBarrelCollection               SimCalorimeterHit                  36299
+HCalEndcapCollection               SimCalorimeterHit                    396
+HCalRingCollection                 SimCalorimeterHit                    203
+HCalRingCollectionDigi             CalorimeterHit                        25
+HCalRingCollectionRec              CalorimeterHit                        25
+HCalRingRelationsSimDigi           LCRelation                            25
+HCalRingRelationsSimRec            LCRelation                            25
+HcalBarrelCollectionDigi           CalorimeterHit                      5364
+HcalBarrelCollectionRec            CalorimeterHit                      5364
+HcalBarrelRelationsSimDigi         LCRelation                          5364
+HcalBarrelRelationsSimRec          LCRelation                          5364
+HcalEndcapCollectionDigi           CalorimeterHit                        22
+HcalEndcapCollectionRec            CalorimeterHit                        22
+HcalEndcapRelationsSimDigi         LCRelation                            22
+HcalEndcapRelationsSimRec          LCRelation                            22
+ITBarrelHits                       TrackerHitPlane                       92
+ITBarrelHitsRelations              LCRelation                            92
+ITEndcapHits                       TrackerHitPlane                        0
+ITEndcapHitsRelations              LCRelation                             0
+InnerTrackerBarrelCollection       SimTrackerHit                        115
+InnerTrackerEndcapCollection       SimTrackerHit                         31
+JetOut                             ReconstructedParticle                  4
+MCParticle                         MCParticle                          1307
+MuonHits                           CalorimeterHit                         9
+MuonHitsRelations                  LCRelation                             9
+OTBarrelHits                       TrackerHitPlane                       93
+OTBarrelHitsRelations              LCRelation                            93
+OTEndcapHits                       TrackerHitPlane                        0
+OTEndcapHitsRelations              LCRelation                             0
+OuterTrackerBarrelCollection       SimTrackerHit                        231
+OuterTrackerEndcapCollection       SimTrackerHit                         67
+PandoraClusters                    Cluster                               37
+PandoraPFOs                        ReconstructedParticle                 43
+PandoraStartVertices               Vertex                                43
+SeedTracks                         Track                                 81
+SelectedPandoraPFOs                ReconstructedParticle                 31
+SiTracks                           Track                                 24
+VXDBarrelHits                      TrackerHitPlane                      183
+VXDBarrelHitsRelations             LCRelation                           183
+VXDEndcapHits                      TrackerHitPlane                       18
+VXDEndcapHitsRelations             LCRelation                            18
+VertexBarrelCollection             SimTrackerHit                        190
+VertexEndcapCollection             SimTrackerHit                         18
+YokeBarrelCollection               SimCalorimeterHit                      6
+YokeEndcapCollection               SimCalorimeterHit                      3
+---------------------------------------------------------------------------
+```
+
+Since there are many collections, these files can become large very quickly when generating many events. To cut out all collections except MCParticle and PandoraPFOs, see trimmer.py in the tools directory.
 
 
 ### Visualization
