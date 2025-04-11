@@ -31,7 +31,7 @@ Within MG5_aMC_v3_5_8, we want to copy our Axion model so that we can use it lat
 
 
 ```
-cp -r ../SM_Axion_UFO models/.
+cp -r {Folder_Where_You_Imported_This_Repo}/SM_Axion_UFO models/.
 ```
 
 
