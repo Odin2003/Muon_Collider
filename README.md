@@ -81,7 +81,7 @@ For a further discussion on decay widths of ALPs, see D.1 of Bauer et al. (https
 
 ```
 cp Cards/param_card.dat bin/internal/ufomodel/.
-./bin/generate events m20_3TeV_50GeV_gamma
+./bin/generate_events m20_3TeV_50GeV_gamma
 ```
 
 You should see this sort of output:
