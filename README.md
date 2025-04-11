@@ -50,10 +50,11 @@ Inside MG5_aMC_v3_5_8, run
 ./bin/mg5_aMC
 ```
 
-This will bring you into the MG5 interface, where we will generate the interactions we want to inspect. We will want to use pythia, import our model, and look at jets with b quarks, so we need to set this up. Then we can generate the desired interaction and output it to a given directory for further analysis:
+This will bring you into the MG5 interface, where we will generate the interactions we want to inspect. We will want to use pythia, import our model, and look at jets with b quarks, so we need to set this up. Then we can generate the desired interaction and output it to a given directory for further analysis (you only have to do the install steps the first time):
 
 
 ```
+install hepmc
 install pythia8
 import model SM_Axion_UFO
 define j = j b b~
