@@ -39,12 +39,12 @@ cp -r {Folder_Where_You_Imported_This_Repo}/SM_Axion_UFO models/.
 Create a conda environment on HPCC with python and root:
 
 ```
-conda create -n my_root_env python=3.9
+conda create -n my_root_env python=3.9 root pythia8=8.313 -c conda-forge
 conda activate my_root_env
 conda install -c conda-forge root
 ```
 
-
+Here it is important to have the version of pythia8 that matches the version for the MG5 installation. MG_3_5_8 has pythia8313.
 
 
 Inside MG5_aMC_v3_5_8, run
