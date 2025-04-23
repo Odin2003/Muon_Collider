@@ -24,27 +24,36 @@ mkdir software
 cd software
 wget https://launchpad.net/mg5amcnlo/3.0/3.6.x/+download/MG5_aMC_v3.5.8.tar.gz
 tar -xvf MG5_aMC_v3.5.8.tar.gz
-cd MG5_aMC_v3_5_8
 ```
-
-
-Within MG5_aMC_v3_5_8, we want to copy our Axion model so that we can use it later:
-
-
-```
-cp -r {Folder_Where_You_Imported_This_Repo}/SM_Axion_UFO models/.
-```
-
 
 Create a conda environment on HPCC with python and root:
 
 ```
-conda create -n my_root_env python=3.9 root pythia8=8.313 -c conda-forge
+conda create -n my_root_env python=3.9
 conda activate my_root_env
 conda install -c conda-forge root
 ```
 
-Here it is important to have the version of pythia8 that matches the version for the MG5 installation. MG_3_5_8 has pythia8313.
+We will need the version of pythia8 we use in madgraph to match the one in our conda environment. Check this using
+
+```
+pythia8-config --version
+```
+
+This should return a version like 8.312. Then get the .tgz file corresponding to this version from the pythia8 website https://pythia.org/releases/ using wget:
+
+```
+wget https://pythia.org/download/pythia83/pythia8312.tgz
+```
+
+
+Now we can start setting up MadGraph5. Within MG5_aMC_v3_5_8, we want to copy our Axion model so that we can use it later:
+
+
+```
+cd MG5_aMC_v3_5_8
+cp -r ../../SM_Axion_UFO models/.
+```
 
 
 Inside MG5_aMC_v3_5_8, run
