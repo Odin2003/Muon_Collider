@@ -72,8 +72,6 @@ This will bring you into the MG5 interface, where we will generate the interacti
 
 
 ```
-install hepmc
-install pythia8
 import model SM_Axion_UFO
 define j = j b b~
 generate mu+ mu- > ax a, (ax > b b~)
