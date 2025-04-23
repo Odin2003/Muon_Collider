@@ -9,6 +9,7 @@ Then get all the files from this repository using
 
 ```
 git clone https://github.com/Odin2003/Muon_Collider.git
+cd Muon_Collider
 ```
 
 ## Event Generation
