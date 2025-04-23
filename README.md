@@ -45,7 +45,7 @@ We will need the version of pythia8 we use in madgraph to match the one in our c
 pythia8-config --version
 ```
 
-This should return a version like 8.312. Then get the .tgz file corresponding to this version from the pythia8 website https://pythia.org/releases/ using wget:
+This should return a version like 8.312. Then get the .tgz file corresponding to this version from the pythia8 website https://pythia.org/releases/ using wget (replace 8312 if your conda environment has a different pythia8 version).
 
 ```
 wget https://pythia.org/download/pythia83/pythia8312.tgz
