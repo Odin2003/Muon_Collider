@@ -5,7 +5,11 @@ This roughly follows the tutorials found at https://mcd-wiki.web.cern.ch/softwar
 ssh -X -Y {USERNAME}@login.hpcc.ttu.edu
 ```
 
+Then get all the files from this repository using
 
+```
+git clone https://github.com/Odin2003/Muon_Collider.git
+```
 
 ## Event Generation
 ### MadGraph 5
