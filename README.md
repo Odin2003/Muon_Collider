@@ -277,7 +277,7 @@ k4run ../mucoll-benchmarks/reconstruction/k4run/reco_steer.py \
 Which takes the digi output file as an input. You can again inspect this file using anajob:
 
 ```
-anajob outpu_reco.slcio
+anajob output_reco.slcio
 ```
 
 This will show you a bunch of different collections, representing hits in different calorimeters. The most important are MCParticle, which contains truth-level data of the event, and PandoraPFOs, which is the reconstructed Particle Flow Objects. Here is an example output for one event:
@@ -381,9 +381,13 @@ To submit jobs to the cluster and generate many events, use jobSubmission.py wit
 
 
 
-# Analysis
+## Analysis
 
+For the analysis we will need a few more packages. Fastjet is used to access the particles and cluster jets together.
 
+```
+conda install fastjet
+```
 
 
 
