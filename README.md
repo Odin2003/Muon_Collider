@@ -68,8 +68,16 @@ Inside MG5_aMC_v3_5_8, run
 ./bin/mg5_aMC
 ```
 
-This will bring you into the MG5 interface, where we will generate the interactions we want to inspect. We will want to use pythia, import our model, and look at jets with b quarks, so we need to set this up. Then we can generate the desired interaction and output it to a given directory for further analysis (you only have to do the install steps the first time):
+This will bring you into the MG5 interface, where we will generate the interactions we want to inspect. We will want to use pythia, so install it with the following command, pointing to the pythia8312.tgz file we dounloaded: 
 
+
+```
+install pythia8 --pythia8_tarball=../pythia8312.tgz
+```
+
+When prompted to install lhapdf6, press y and return. Then all installations should follow. 
+
+After pythia8 was successfully installed, we will want to import our model and look at jets with b quarks, so we need to set this up. Then we can generate the desired interaction and output it to a given directory for further analysis:
 
 ```
 import model SM_Axion_UFO
@@ -134,7 +142,11 @@ tag_1_pythia8.cmd	tag_1_pythia8.log  tag_1_pythia8_events.hepmc.gz  unweighted_e
 ```
 
 
-The .txt file will hold some of the MG5 output. At the bottom of this file you will find the cross-section of your interaction. We will continue with the tag_1_pythia8_events.hepmc.gz file, which holds the showered data of our collisions.
+The .txt file will hold some of the MG5 output. At the bottom of this file you will find the cross-section of your interaction. We will continue with the tag_1_pythia8_events.hepmc.gz file, which holds the showered data of our collisions. Let's unzip it for future use.
+
+```
+gunzip tag_1_pythia8_events.hepmc.gz
+```
 
 We have now finished "nature's part of the job", the physics that takes place when we collide muons together and produce photons and ALPs, which decay and hadronize to produce jets. Now we want to know what nature looks like when we, as humans, look at it using a detector. We pass the .hepmc file to an emulater which "smears" the truth-level data in a way that mimics our detector. Only then can we compare simulation to experiment.
 
@@ -168,16 +180,21 @@ source /opt/setup_mucoll.sh
 ```
 
 
+
 ### simulation
-For the simulation step, Monte Carlo particles are passed through the detector with GEANT4. We pass the .hepmc file created by Pythia8 in event generation to the detector. Make sure you ran and set up the singularity environment as before:
+For the simulation step, Monte Carlo particles are passed through the detector with GEANT4. We pass the .hepmc file created by Pythia8 in event generation to the detector. Make sure you ran and set up the singularity environment as above. Go back to the software directory and copy the .hepmc file we created to software, 
 
 ```
-singularity shell docker://gitlab-registry.cern.ch/muon-collider/mucoll-deploy/mucoll:2.9-alma9
-source /opt/setup_mucoll.sh
+cp MG5_aMC_v3_5_8/mu_mu_ax_gamma/Events/m20_3TeV_50GeV_gamma/tag_1_pythia8_events.hepmc .
 ```
 
+Then create and enter a sim directory
 
-Then create a sim directory, in which you run
+```
+mkdir sim && cd sim
+```
+
+and run the following command that simulates the showered particles interacting with the muon detector material:
 
 ```
 ddsim --steeringFile ../mucoll-benchmarks/simulation/ilcsoft/steer_baseline.py \
@@ -186,11 +203,13 @@ ddsim --steeringFile ../mucoll-benchmarks/simulation/ilcsoft/steer_baseline.py \
 --outputFile output_sim.slcio
 ```
 
-Make sure the first two lines poing to the correct steer and .hepmc files. You can inspect the output file using
+Make sure the first two lines point to the correct steer and .hepmc files. You can inspect the output file using
 
 ```
 anajob output_sim.slcio
 ```
+
+Which will show multiple particle collections, where particles hit the different parts of the detector.
 
 ### digitisation
 
