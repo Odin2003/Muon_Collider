@@ -172,20 +172,30 @@ The detector emulation has three steps:
 *  reconstructing the particle tracks from detector information (**reco**)
 
 
-For everything with the detector steps, use the singularity environment. Set up the singularity shell to have all dependencies:
+For everything with the detector steps, use the singularity environment. Let's get some computing resources and set up the singularity shell to have all dependencies:
+
+
+```
+insteractive -p nocona
+```
 
 ```
 singularity shell docker://gitlab-registry.cern.ch/muon-collider/mucoll-deploy/mucoll:2.9-alma9
 source /opt/setup_mucoll.sh
 ```
 
+This wil get rid of the left part of your terminal showing your directory. If you ever get lost, just print your working directory with
+
+```
+pwd
+```
 
 
 ### simulation
 For the simulation step, Monte Carlo particles are passed through the detector with GEANT4. We pass the .hepmc file created by Pythia8 in event generation to the detector. Make sure you ran and set up the singularity environment as above. Go back to the Muon_Colider directory and copy the .hepmc file we created to software, 
 
 ```
-cp MG5_aMC_v3_5_8/mu_mu_ax_gamma/Events/m20_3TeV_50GeV_gamma/tag_1_pythia8_events.hepmc .
+cp software/MG5_aMC_v3_5_8/mu_mu_ax_gamma/Events/m20_3TeV_50GeV_gamma/tag_1_pythia8_events.hepmc .
 ```
 
 Then create and enter a sim directory
@@ -213,7 +223,14 @@ Which will show multiple particle collections, where particles hit the different
 
 ### digitisation
 
-Next is the digitisation step, which typically involves a minimum amount of energy to be considered a hit and smears the energy to a realistic detector resolution. Make a digi directory and run
+Next is the digitisation step, which typically involves a minimum amount of energy to be considered a hit and smears the energy to a realistic detector resolution. Make a digi directory inside Muon_Collider
+
+```
+cd ..
+mkdir digi && cd digi
+```
+
+and run
 
 ```
 k4run ../mucoll-benchmarks/digitisation/k4run/digi_steer.py \
@@ -237,10 +254,15 @@ ACTS_TGeoFile=/opt/spack/opt/spack/linux-almalinux9-x86_64/gcc-11.3.1/actstracki
 ACTS_MatFile=/opt/spack/opt/spack/linux-almalinux9-x86_64/gcc-11.3.1/actstracking-1.2.2-tjfu4av5xb6ivzyihvi2a3djbpnqx5nk/share/ACTSTracking/data/material-maps.json
 ```
 
-Then create a reco directory and copy the settings from the mucoll-benchmarks directory into it:
+Then create a reco directory in Muon_Collider and copy the settings from the mucoll-benchmarks directory into it:
 
 ```
-cp -a /home/odschnei/USMCC/mucoll-benchmarks/reconstruction/k4run/PandoraSettings ./
+cd ..
+mkdir reco && cd reco
+```
+
+```
+cp -a ../mucoll-benchmarks/reconstruction/k4run/PandoraSettings .
 ```
 
 Now you can run the reconstruction step:
