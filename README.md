@@ -182,7 +182,7 @@ source /opt/setup_mucoll.sh
 
 
 ### simulation
-For the simulation step, Monte Carlo particles are passed through the detector with GEANT4. We pass the .hepmc file created by Pythia8 in event generation to the detector. Make sure you ran and set up the singularity environment as above. Go back to the software directory and copy the .hepmc file we created to software, 
+For the simulation step, Monte Carlo particles are passed through the detector with GEANT4. We pass the .hepmc file created by Pythia8 in event generation to the detector. Make sure you ran and set up the singularity environment as above. Go back to the Muon_Colider directory and copy the .hepmc file we created to software, 
 
 ```
 cp MG5_aMC_v3_5_8/mu_mu_ax_gamma/Events/m20_3TeV_50GeV_gamma/tag_1_pythia8_events.hepmc .
