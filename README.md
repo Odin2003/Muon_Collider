@@ -68,7 +68,7 @@ Inside MG5_aMC_v3_5_8, run
 ./bin/mg5_aMC
 ```
 
-This will bring you into the MG5 interface, where we will generate the interactions we want to inspect. We will want to use pythia, so install it with the following command, pointing to the pythia8312.tgz file we dounloaded: 
+This will bring you into the MG5 interface, where we will generate the interactions we want to inspect. We will want to use pythia, so install it with the following command, pointing to the pythia8312.tgz file we downloaded: 
 
 
 ```
