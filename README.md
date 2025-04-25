@@ -360,15 +360,31 @@ ced2go -d ${MUCOLL_GEO} output_reco.slcio
 
 This will be slow and buffering due to the pipeline created to the HPCC, but will give you a good visualiztion of your events and the calorimeters involved. It should look something like this
 
+
+<div align="center">
+  <img width="200" alt="image" src="https://github.com/user-attachments/assets/5fb7f5a6-659d-44ef-88cf-79741a0a0432" />
+</div>  
+<br>
+
 ![image](https://github.com/user-attachments/assets/5fb7f5a6-659d-44ef-88cf-79741a0a0432)
 
 
 Staring down the barrel and zooming in on the ECal and HCal regions, see if you can identify the jets from the 2 b-quarks and the photon:
 
+
+<div align="center">
+  <img width="200" alt="image" src="https://github.com/user-attachments/assets/20cb173f-4ff1-46e6-ba44-a73b39029c4d" />
+</div>  
+<br>
 ![image](https://github.com/user-attachments/assets/20cb173f-4ff1-46e6-ba44-a73b39029c4d)
 
 
 The momentum of the ALP is much larger than its mass (the 3TeV CoM energy must go somewhere, and only 20 GeV goes to mass in this case). This means the two b-quarks are very boosted and the two jets are close together, creating one fat-jet. If we increase the mass of the ALP, there is more recoil between the quarks in the decay and the jets are further apart. Here is an example with a 1TeV alp:
+
+<div align="center">
+  <img width="200" alt="image" src="https://github.com/user-attachments/assets/50bce890-f812-4326-a634-01cb1f9a32a1" />
+</div>  
+<br>
 
 ![image](https://github.com/user-attachments/assets/50bce890-f812-4326-a634-01cb1f9a32a1)
 
