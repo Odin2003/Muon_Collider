@@ -483,3 +483,5 @@ invariant mass:  15.535862298459412
 
 The invariant mass is close to the alp mass, but will fluctuate heavily due to the large CoM energy (3 TeV) compared to a relatively low mass (20 GeV).
 
+This will also create a root file with the basic histograms. I would recommend copying them to your local machine and then looking at them there with TBrowser or modifying the os_analysis.ipynb jupyter notebook in the analysis folder which I used to create the plots on the muon collider poster.
+
