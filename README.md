@@ -483,5 +483,37 @@ invariant mass:  15.535862298459412
 
 The invariant mass is close to the alp mass, but will fluctuate heavily due to the large CoM energy (3 TeV) compared to a relatively low mass (20 GeV).
 
-This will also create a root file with the basic histograms. I would recommend copying them to your local machine and then looking at them there with TBrowser or modifying the os_analysis.ipynb jupyter notebook in the analysis folder which I used to create the plots on the muon collider poster.
+This will also create a root file with the basic histograms. I would recommend copying them to your local machine and then looking at them there with TBrowser or modifying the os_analysis.ipynb jupyter notebook in the analysis folder which I used to create the plots on the muon collider poster. When histogramming real results, remember you need to scale your histogram by the amount of expected events per year.
+
+
+
+## Background
+
+To generate background for our signal, follow the same process but in madgraph we now don't import the SM_Axion_Model since we want to look at SM background. The background for our process is events where we have a photon and two jets, so in MG5 we run
+
+```
+define j = j b b~
+generate mu+ mu- > a j j
+output background
+```
+
+Then follow the same steps as above until you have the output_reco.slcio file you can analyze. Reconstructing the invariant mass will give sharp peaks at each of the possible mediator masses ($0$ GeV for $\gamma$, roughly $90$ GeV$\Z_0$, and about $125$ GeV for $\H$). Here is the invariant mass histogram of the jets for a $1$ TeV alp for signal and background:
+
+
+<div align="center">
+  <img width="500" alt="image" src="https://github.com/user-attachments/assets/1faa8d36-5243-42ed-8a20-cad635a9c381" />
+</div>  
+<br>
+
+
+
+
+## Tools
+
+In the **tools** folder, you'll find some scripts I found useful. Since our code generates a bunch of different collections, this quickly creates very large files. trimmer.py will take an input file and get rid of everything apart from the MCParticle and PandoraPFOs collections, greatly reducing the size of your files. merge_slcio.py merges a bunch of .slcio files together. This is useful when running batch jobs, as you will get many individual output_reco.slcio files (since they were generated in parallel). To do the analysis on one file we want to merge all of these. Make sure the paths are set correctly in the .py files when using them.
+
+
+
+
+
 
