@@ -418,7 +418,7 @@ conda activate my_root_env   #  conda environment we created earlier with root a
 conda install fastjet
 ```
 
-We will also need LCIO to inspect the output_reco.slcio file. Conda does not have a simple install command for this, so we need to do it by hand. In your **software** directory, run the following commands individually
+We will also need LCIO to inspect the output_reco.slcio file. Conda does not have a simple install command for this, so we need to do it by hand by roughly following the guide from the Laboratoire Leprince-Ringuet (https://llr.in2p3.fr/~kunath/eehiq/lcio_based/pyLCIO3_on_LLR_jupyterhub.html). In your **software** directory, run the following commands individually
 
 ```
 git clone https://github.com/iLCSoft/LCIO.git
