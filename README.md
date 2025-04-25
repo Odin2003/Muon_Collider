@@ -461,5 +461,25 @@ Then run it to set up LCIO:
 source setup.sh
 ```
 
-Now we have all the packages we need for our analysis.
+You may need to do this every session you want to use LCIO, so it might be useful to create an alias which goes into the LCIO directory, runs source setup.sh, and leaves the directory again.
+
+Now we have all the packages we need for our analysis. Within the analysis folder, there is an m20_jet_analysis.py script which has some basic functions for an analysis. Go into the analysis directory and try running it
+
+```
+python m20_jet_analysis.py
+```
+
+
+This script will give you some basic information, such as the pT and invariant masses of the jets. Since here we have a low alp mass, we use a boosted analysis and only expect one fat-jet and one jet from the photon. An output for one event should look something like
+
+```
+Processing Event: 1
+jet_pt:  78.56767178187076
+jet mass:  15.535862298459529
+photon jet pt:  296.5501446240485
+photon jet mass:  0.8019705347108138
+invariant mass:  15.535862298459412
+```
+
+The invariant mass is close to the alp mass, but will fluctuate heavily due to the large CoM energy (3 TeV) compared to a relatively low mass (20 GeV).
 
