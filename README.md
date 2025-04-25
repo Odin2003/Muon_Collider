@@ -411,7 +411,7 @@ To submit jobs to the cluster and generate many events, use jobSubmission.py wit
 
 ## Analysis
 
-For the analysis we will need a few more packages. Fastjet is used to access the particles and cluster jets together.
+For the analysis we will need a few more packages. Exit the singularity shell and activate the conda environment. Fastjet is used later to access the particles and cluster jets together.
 
 ```
 conda activate my_root_env   #  conda environment we created earlier with root and python 3.9
