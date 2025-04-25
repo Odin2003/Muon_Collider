@@ -358,7 +358,21 @@ If you logged into HPCC using the "-X -Y" add-on, you can visualize your events 
 ced2go -d ${MUCOLL_GEO} output_reco.slcio
 ```
 
-This will be slow and buffering due to the pipeline created to the HPCC, but will give you a good visualiztion of your events and the calorimeters involved.
+This will be slow and buffering due to the pipeline created to the HPCC, but will give you a good visualiztion of your events and the calorimeters involved. It should look something like this
+
+![image](https://github.com/user-attachments/assets/5fb7f5a6-659d-44ef-88cf-79741a0a0432)
+
+
+Staring down the barrel and zooming in on the ECal and HCal regions, see if you can identify the jets from the 2 b-quarks and the photon:
+
+![image](https://github.com/user-attachments/assets/20cb173f-4ff1-46e6-ba44-a73b39029c4d)
+
+
+The momentum of the ALP is much larger than its mass (the 3TeV CoM energy must go somewhere, and only 20 GeV goes to mass in this case). This means the two b-quarks are very boosted and the two jets are close together, creating one fat-jet. If we increase the mass of the ALP, there is more recoil between the quarks in the decay and the jets are further apart. Here is an example with a 1TeV alp:
+
+![image](https://github.com/user-attachments/assets/50bce890-f812-4326-a634-01cb1f9a32a1)
+
+Notice how the quark jets are now further apart.
 
 Now you know how to generate events and reconstruct them using the detector for the muon collider. You will have noticed that this takes a considerable amount of time for only few events. The next section describes how to generate multiple thousand events for an analysis.
 
@@ -386,8 +400,52 @@ To submit jobs to the cluster and generate many events, use jobSubmission.py wit
 For the analysis we will need a few more packages. Fastjet is used to access the particles and cluster jets together.
 
 ```
+conda activate my_root_env   #  conda environment we created earlier with root and python 3.9
 conda install fastjet
 ```
 
+We will also need LCIO to inspect the output_reco.slcio file. Conda does not have a simple install command for this, so we need to do it by hand. In your **software** directory, run the following commands individually
 
+```
+git clone https://github.com/iLCSoft/LCIO.git
+cd LCIO
+mkdir build
+cd build
+module load cmake   #  ensures an updated version of cmake on HPCC
+cmake -DBUILD_ROOTDICT=ON -D CMAKE_CXX_STANDARD=17 ..
+make -j4
+make install
+cd ..
+```
+
+
+There should be a lib or lib64 dictionary in LCIO/build/ which holds a bunch of dependencies for pyLCIO. We need to link these correctly in the setup.sh file within LCIO. Change the lib and lib64 paths in the for loop to point to your directories in the build directory. The setup.sh file should then look something like this:
+
+```
+#!/bin/sh
+
+#
+# initialize the current LCIO version by sourcing this in the top level directory
+#
+
+export LCIO=$(pwd)
+export PATH=$LCIO/bin:$LCIO/tools:$PATH
+for d in build/lib build/lib64; do
+    if [ -d ${LCIO}/${d} ]; then
+        export LD_LIBRARY_PATH=${LCIO}/${d}:${LD_LIBRARY_PATH}
+    fi
+done
+export PYTHONPATH=$LCIO/python:$PYTHONPATH
+alias pylcio='python $LCIO/python/pylcio.py'
+# Necessary for python bindings to work properly
+export CPATH=$LCIO:$LCIO/include:$CPATH
+```
+
+Then run it to set up LCIO:
+
+```
+source setup.sh
+```
+
+Now we have all the packages we need for our analysis.
 
