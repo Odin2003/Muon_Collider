@@ -386,7 +386,7 @@ The momentum of the ALP is much larger than its mass (the 3TeV CoM energy must g
 <br>
 
 
-Notice how the quark jets are now further apart. This is important. If your jets are close together, use a boosted analysis with a larger jet radius. If they are far enought apart, use a resolved analysis where you cluster the two jets separately.
+Notice how the quark jets are now further apart. This is important. If your jets are close together, use a boosted analysis where both are clustered into one jet with a larger radius (usually $R ~ 0.8$). If they are far enough apart, use a resolved analysis where you cluster the two jets separately ($R ~ 0.4$).
 
 Now you know how to generate events and reconstruct them using the detector for the muon collider. You will have noticed that this takes a considerable amount of time for only few events. The next section describes how to generate multiple thousand events for an analysis.
 
