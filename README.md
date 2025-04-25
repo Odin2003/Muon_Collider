@@ -497,7 +497,7 @@ generate mu+ mu- > a j j
 output background
 ```
 
-Then follow the same steps as above until you have the output_reco.slcio file you can analyze. Reconstructing the invariant mass will give sharp peaks at each of the possible mediator masses ($0$ GeV for $\gamma$, roughly $90$ GeV$\Z_0$, and about $125$ GeV for the Higgs). Here is the invariant mass histogram of the jets for a $1$ TeV alp for signal and background:
+Then follow the same steps as above until you have the output_reco.slcio file you can analyze. Reconstructing the invariant mass will give sharp peaks at each of the possible mediator masses ($0$ GeV for $\gamma$, roughly $90$ GeV$Z_0$, and about $125$ GeV for the Higgs). Here is the invariant mass histogram of the jets for a $1$ TeV alp for signal and background:
 
 
 <div align="center">
