@@ -411,11 +411,19 @@ To submit jobs to the cluster and generate many events, use jobSubmission.py wit
 
 ## Analysis
 
-For the analysis we will need a few more packages. Exit the singularity shell and activate the conda environment. Fastjet is used later to access the particles and cluster jets together.
+For the analysis we will need a few more packages. Exit the singularity shell and activate the conda environment. Fastjet is used later to access the particles and cluster jets together. Try this for installation. If it doesn't work, ChatGPT can probably help (prompt it for fastjet installation within a conda environment).
 
 ```
 conda activate my_root_env   #  conda environment we created earlier with root and python 3.9
-conda install fastjet
+wget http://fastjet.fr/repo/fastjet-3.4.0.tar.gz
+tar -xvzf fastjet-3.4.0.tar.gz
+cd fastjet-3.4.0
+./configure --prefix=$CONDA_PREFIX
+make -j
+make install
+
+conda install -c conda-forge pybind11
+pip install fastjet
 ```
 
 We will also need LCIO to inspect the output_reco.slcio file. Conda does not have a simple install command for this, so we need to do it by hand by roughly following the guide from the Laboratoire Leprince-Ringuet (https://llr.in2p3.fr/~kunath/eehiq/lcio_based/pyLCIO3_on_LLR_jupyterhub.html). In your **software** directory, run the following commands individually
